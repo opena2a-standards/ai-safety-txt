@@ -117,7 +117,9 @@
       appears on its own line in the form "Field: value", where the field name is
       case-insensitive and is separated from its value by a colon and optional
       whitespace. Lines whose first non-whitespace character is "#" are comments
-      and MUST be ignored. Consumers MUST ignore any field name they do not
+      and MUST be ignored. Blank lines, including lines containing only
+      whitespace, carry no meaning and MUST be ignored. Consumers MUST ignore
+      any field name they do not
       recognize, so that the format can be extended without breaking existing
       consumers. A field name SHOULD NOT appear more than once; if it does, a
       consumer MUST use the first occurrence.</t>
