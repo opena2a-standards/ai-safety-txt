@@ -18,11 +18,11 @@ Abstract
    AI-safety posture to autonomous agents and agent-driven browsers.
    Modeled on the robots.txt convention, an ai-safety.txt file lets a
    domain assert, in a machine-readable form, whether its content is
-   safe for autonomous agent consumption, whether that content is
-   hardened against prompt injection, and whether it is rendered
-   consistently to human and agent user agents.  The file also carries a
-   security contact, a link to an external verification record, and the
-   date the declaration was last verified.
+   authored by the domain rather than user-generated, whether that
+   content is hardened against prompt injection, and whether it is
+   rendered consistently to human and agent user agents.  The file also
+   carries a security contact, a link to an external verification
+   record, and the date the declaration was last verified.
 
    The declarations in an ai-safety.txt file are self-asserted by the
    publishing domain.  This document specifies the file format and its
@@ -77,18 +77,18 @@ Table of Contents
    1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   2
    2.  Conventions and Terminology . . . . . . . . . . . . . . . . .   3
    3.  File Format and Fields  . . . . . . . . . . . . . . . . . . .   3
-   4.  The Well-Known URI  . . . . . . . . . . . . . . . . . . . . .   4
+   4.  The Well-Known URI  . . . . . . . . . . . . . . . . . . . . .   5
    5.  Security Considerations . . . . . . . . . . . . . . . . . . .   5
      5.1.  Declarations Are Self-Asserted  . . . . . . . . . . . . .   5
      5.2.  Independent Verification  . . . . . . . . . . . . . . . .   5
-     5.3.  Cloaking and Consistent-Rendering . . . . . . . . . . . .   5
+     5.3.  Cloaking and Consistent-Rendering . . . . . . . . . . . .   6
      5.4.  Transport Integrity . . . . . . . . . . . . . . . . . . .   6
    6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   6
    7.  Normative References  . . . . . . . . . . . . . . . . . . . .   6
    8.  Informative References  . . . . . . . . . . . . . . . . . . .   6
    Appendix A.  Related Work . . . . . . . . . . . . . . . . . . . .   7
    Appendix B.  Acknowledgments  . . . . . . . . . . . . . . . . . .   7
-   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .   7
+   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .   8
 
 1.  Introduction
 
@@ -170,9 +170,20 @@ Fane                     Expires 7 January 2027                 [Page 3]
 Internet-Draft                ai-safety.txt                    July 2026
 
 
-   AI-Safe (boolean)  Whether the domain asserts that its content is
-      safe for autonomous agent consumption.  A value of "true" asserts
-      safety; "false" asserts that the domain does not make that claim.
+   AI-Safe (boolean)  Whether the domain asserts that the content it
+      serves is authored or reviewed by the domain, is not user-
+      generated, and is not published with intent to harm a consuming
+      agent.  This field asserts provenance and intent, not immunity.  A
+      domain that accepts and serves content it does not review, such as
+      user comments, forum posts, or wiki edits, cannot determine the
+      intent behind that content and MUST NOT assert "AI-Safe: true" for
+      it.  A value of "false" asserts that the domain does not make the
+      claim, and is the correct value for any domain that is unsure.
+      Asserting "AI-Safe: true" does not assert that the content is
+      harmless to process: a domain MAY assert "AI-Safe: true" while
+      serving prompt-injection payloads, exploit code, or other
+      hazardous material as documented research or reference, provided
+      it declares "Injection-Protected: false".
 
    Injection-Protected (boolean)  Whether the domain asserts that its
       content is hardened against prompt-injection payloads embedded in
@@ -203,6 +214,18 @@ Internet-Draft                ai-safety.txt                    July 2026
 
    The following is an example ai-safety.txt file.
 
+
+
+
+
+
+
+
+Fane                     Expires 7 January 2027                 [Page 4]
+
+Internet-Draft                ai-safety.txt                    July 2026
+
+
    # ai-safety.txt for example.com
    AI-Safe: true
    Injection-Protected: true
@@ -218,13 +241,6 @@ Internet-Draft                ai-safety.txt                    July 2026
    known URI mechanism defined in [RFC8615].  A consumer constructs the
    request URI by appending "/.well-known/ai-safety.txt" to the domain's
    origin.
-
-
-
-Fane                     Expires 7 January 2027                 [Page 4]
-
-Internet-Draft                ai-safety.txt                    July 2026
-
 
    The file SHOULD be served over HTTPS with the media type "text/
    plain".  A consumer that receives any response status other than a
@@ -258,6 +274,14 @@ Internet-Draft                ai-safety.txt                    July 2026
    actually corresponds to the domain in question and originates from a
    verifier the consumer trusts.
 
+
+
+
+Fane                     Expires 7 January 2027                 [Page 5]
+
+Internet-Draft                ai-safety.txt                    July 2026
+
+
 5.3.  Cloaking and Consistent-Rendering
 
    A domain can serve different content to agents than to human
@@ -269,18 +293,6 @@ Internet-Draft                ai-safety.txt                    July 2026
    mismatch between a "Consistent-Rendering: true" declaration and
    observed behavior is a strong negative signal and SHOULD override the
    declaration.
-
-
-
-
-
-
-
-
-Fane                     Expires 7 January 2027                 [Page 5]
-
-Internet-Draft                ai-safety.txt                    July 2026
-
 
 5.4.  Transport Integrity
 
@@ -319,6 +331,13 @@ Internet-Draft                ai-safety.txt                    July 2026
 
 8.  Informative References
 
+
+
+Fane                     Expires 7 January 2027                 [Page 6]
+
+Internet-Draft                ai-safety.txt                    July 2026
+
+
    [AI-TXT]   "AI.TXT: A Declaration File for AI Usage Preferences,
               Licensing, and Policy", 2026,
               <https://datatracker.ietf.org/doc/draft-car-ai-txt-
@@ -329,14 +348,6 @@ Internet-Draft                ai-safety.txt                    July 2026
               for Expressing AI Usage Preferences", 2026,
               <https://datatracker.ietf.org/doc/draft-ietf-aipref-
               vocab/>.
-
-
-
-
-Fane                     Expires 7 January 2027                 [Page 6]
-
-Internet-Draft                ai-safety.txt                    July 2026
-
 
    [RFC9309]  Koster, M., Illyes, G., Zeller, H., and L. Sassman,
               "Robots Exclusion Protocol", RFC 9309, September 2022,
@@ -359,21 +370,29 @@ Appendix A.  Related Work
    consumer of content.  The present document is complementary and
    orthogonal in scope: ai-safety.txt declares the domain's own safety
    posture toward agents that consume its content, namely whether the
-   content is asserted safe for autonomous consumption, hardened against
-   embedded prompt injection, and rendered identically to human and
-   agent user agents.  It expresses no usage, licensing, or training
-   preference.  A domain MAY publish both an AI usage preferences
-   declaration and an ai-safety.txt declaration; they answer different
-   questions and do not overlap.  Where both are present, a consuming
-   agent applies usage preferences to decide whether it may process the
-   content and applies the ai-safety.txt declaration as one input,
-   subject to the verification caveats in this document, to how
+   content is authored by the domain rather than user-generated,
+   hardened against embedded prompt injection, and rendered identically
+   to human and agent user agents.  It expresses no usage, licensing, or
+   training preference.  A domain MAY publish both an AI usage
+   preferences declaration and an ai-safety.txt declaration; they answer
+   different questions and do not overlap.  Where both are present, a
+   consuming agent applies usage preferences to decide whether it may
+   process the content and applies the ai-safety.txt declaration as one
+   input, subject to the verification caveats in this document, to how
    cautiously it should do so.
 
 Appendix B.  Acknowledgments
 
    This specification was authored in the open and benefits from review
    of its declaration model by the OpenA2A community.
+
+
+
+
+Fane                     Expires 7 January 2027                 [Page 7]
+
+Internet-Draft                ai-safety.txt                    July 2026
+
 
 Author's Address
 
@@ -389,4 +408,41 @@ Author's Address
 
 
 
-Fane                     Expires 7 January 2027                 [Page 7]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Fane                     Expires 7 January 2027                 [Page 8]

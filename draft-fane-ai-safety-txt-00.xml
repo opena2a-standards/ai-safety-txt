@@ -38,9 +38,10 @@
       a domain publishes at a well-known location to communicate its AI-safety
       posture to autonomous agents and agent-driven browsers. Modeled on the
       robots.txt convention, an ai-safety.txt file lets a domain assert, in a
-      machine-readable form, whether its content is safe for autonomous agent
-      consumption, whether that content is hardened against prompt injection,
-      and whether it is rendered consistently to human and agent user agents. The
+      machine-readable form, whether its content is authored by the domain rather
+      than user-generated, whether that content is hardened against prompt
+      injection, and whether it is rendered consistently to human and agent user
+      agents. The
       file also carries a security contact, a link to an external verification
       record, and the date the declaration was last verified.</t>
 
@@ -128,9 +129,19 @@
 
       <dl spacing="normal">
         <dt>AI-Safe (boolean)</dt>
-        <dd>Whether the domain asserts that its content is safe for autonomous
-        agent consumption. A value of "true" asserts safety; "false" asserts that
-        the domain does not make that claim.</dd>
+        <dd>Whether the domain asserts that the content it serves is authored or
+        reviewed by the domain, is not user-generated, and is not published with
+        intent to harm a consuming agent. This field asserts provenance and
+        intent, not immunity. A domain that accepts and serves content it does
+        not review, such as user comments, forum posts, or wiki edits, cannot
+        determine the intent behind that content and MUST NOT assert "AI-Safe:
+        true" for it. A value of "false" asserts that the domain does not make
+        the claim, and is the correct value for any domain that is unsure.
+        Asserting "AI-Safe: true" does not assert that the content is harmless
+        to process: a domain MAY assert "AI-Safe: true" while serving
+        prompt-injection payloads, exploit code, or other hazardous material
+        as documented research or reference, provided it declares
+        "Injection-Protected: false".</dd>
 
         <dt>Injection-Protected (boolean)</dt>
         <dd>Whether the domain asserts that its content is hardened against
@@ -338,8 +349,8 @@ Last-Verified: 2026-07-01
       systems: they are addressed to the operator of the AI system as consumer of
       content. The present document is complementary and orthogonal in scope:
       ai-safety.txt declares the domain's own safety posture toward agents that
-      consume its content, namely whether the content is asserted safe for
-      autonomous consumption, hardened against embedded prompt injection, and
+      consume its content, namely whether the content is authored by the domain
+      rather than user-generated, hardened against embedded prompt injection, and
       rendered identically to human and agent user agents. It expresses no usage,
       licensing, or training preference. A domain MAY publish both an AI usage
       preferences declaration and an ai-safety.txt declaration; they answer
