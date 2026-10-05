@@ -3,8 +3,8 @@
 The domain AI-safety declaration format. A file published at `/.well-known/ai-safety.txt`
 where a domain declares its AI-safety posture to the agents that read its content.
 
-Specified as an IETF Internet-Draft:
-[draft-fane-ai-safety-txt-00](https://datatracker.ietf.org/doc/draft-fane-ai-safety-txt/).
+Specified as an IETF Internet-Draft, current revision
+[draft-fane-ai-safety-txt-01](https://datatracker.ietf.org/doc/draft-fane-ai-safety-txt/) (submitted 2026-07-23).
 Spec page: [specs.opena2a.org/specs/ai-safety](https://specs.opena2a.org/specs/ai-safety).
 
 ## What it is
@@ -50,8 +50,9 @@ questions.
 
 ## Documents
 
-- `draft-fane-ai-safety-txt-00.xml` — the Internet-Draft (RFCXML source).
-- `draft-fane-ai-safety-txt-00.txt` — the rendered text.
+- `draft-fane-ai-safety-txt-01.xml`: the Internet-Draft, revision 01 (RFCXML source).
+- `draft-fane-ai-safety-txt-01.txt`: revision 01 rendered as text.
+- `draft-fane-ai-safety-txt-00.{xml,txt}`: revision 00 (document date 2026-07-06), superseded by -01.
 
 ## License
 
