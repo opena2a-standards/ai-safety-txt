@@ -42,8 +42,12 @@ The `Contact` field gives agent operators a security or abuse address, and
 `Consistent-Rendering` states that identical content is served to human and agent user
 agents.
 
-What you can do today: publish the six-line example below at
-`/.well-known/ai-safety.txt` on your domain.
+What you can do today: publish a declaration in the format of the example below at
+`/.well-known/ai-safety.txt` on your domain, with your own values. The example describes
+a hypothetical `example.com`; copied unchanged, it makes claims about your domain that
+nobody has verified. All six fields are optional. Declare only what is true for your
+domain (the draft makes `AI-Safe: false` the correct value for a domain that is unsure),
+and omit `Attestation` until an external verification record for your domain exists.
 
 Where it stops today: the same limit applies.
 
@@ -73,6 +77,9 @@ proof. A consuming agent verifies the claim against the `Attestation` record whe
 | `Last-Verified` | ISO 8601 date | When the declaration was last verified. |
 
 ## Example
+
+The values describe a hypothetical `example.com`. Replace them with your own before
+publishing, and leave out `Attestation` until a verification record for your domain exists.
 
 ```
 AI-Safe: true
