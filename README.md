@@ -7,6 +7,15 @@ Specified as an IETF Internet-Draft, current revision
 [draft-fane-ai-safety-txt-01](https://datatracker.ietf.org/doc/draft-fane-ai-safety-txt/) (submitted 2026-07-23).
 Spec page: [specs.opena2a.org/specs/ai-safety](https://specs.opena2a.org/specs/ai-safety).
 
+## What it is
+
+A robots.txt-equivalent for AI safety. A domain publishes a short text file; an agent
+fetches it before acting on a page. A declaration is self-asserted: it is a hint, not
+proof. A consuming agent verifies the claim against the `Attestation` record where present.
+
+Read the current draft: [`draft-fane-ai-safety-txt-01.txt`](draft-fane-ai-safety-txt-01.txt).
+To publish a declaration, start from the [example](#example) with your own values.
+
 ## Use cases
 
 ### Your agent is about to read a site it has never seen
@@ -45,7 +54,9 @@ agents.
 What you can do today: publish a declaration in the format of the example below at
 `/.well-known/ai-safety.txt` on your domain, with your own values. The example describes
 a hypothetical `example.com`; copied unchanged, it makes claims about your domain that
-nobody has verified. All six fields are optional. Declare only what is true for your
+nobody has verified.
+
+All six fields are optional. Declare only what is true for your
 domain (the draft makes `AI-Safe: false` the correct value for a domain that is unsure),
 and omit `Attestation` until an external verification record for your domain exists.
 
@@ -56,12 +67,6 @@ repository ([`draft-fane-ai-safety-txt-01.xml`](draft-fane-ai-safety-txt-01.xml)
 [`draft-fane-ai-safety-txt-01.txt`](draft-fane-ai-safety-txt-01.txt)) and on the [IETF
 datatracker](https://datatracker.ietf.org/doc/draft-fane-ai-safety-txt/); and a live
 declaration is served at `https://opena2a.org/.well-known/ai-safety.txt`.
-
-## What it is
-
-A robots.txt-equivalent for AI safety. A domain publishes a short text file; an agent
-fetches it before acting on a page. A declaration is self-asserted: it is a hint, not
-proof. A consuming agent verifies the claim against the `Attestation` record where present.
 
 ## The format
 
@@ -103,9 +108,10 @@ questions.
 
 ## Documents
 
-- `draft-fane-ai-safety-txt-01.xml`: the Internet-Draft, revision 01 (RFCXML source).
-- `draft-fane-ai-safety-txt-01.txt`: revision 01 rendered as text.
-- `draft-fane-ai-safety-txt-00.{xml,txt}`: revision 00 (document date 2026-07-06), superseded by -01.
+- [`draft-fane-ai-safety-txt-01.xml`](draft-fane-ai-safety-txt-01.xml): the Internet-Draft, revision 01 (RFCXML source).
+- [`draft-fane-ai-safety-txt-01.txt`](draft-fane-ai-safety-txt-01.txt): revision 01 rendered as text.
+- [`draft-fane-ai-safety-txt-00.xml`](draft-fane-ai-safety-txt-00.xml), [`draft-fane-ai-safety-txt-00.txt`](draft-fane-ai-safety-txt-00.txt):
+  revision 00, superseded by -01; its document date is on its first page.
 
 ## License
 
