@@ -11,7 +11,7 @@ Spec page: [specs.opena2a.org/specs/ai-safety](https://specs.opena2a.org/specs/a
 
 A robots.txt-equivalent for AI safety. A domain publishes a short text file; an agent
 fetches it before acting on a page. A declaration is self-asserted: it is a hint, not
-proof. A consuming agent verifies the claim against the `Attestation` record where present.
+proof. A consuming agent should check the claim against the `Attestation` record where present.
 
 Read the current draft: [`draft-fane-ai-safety-txt-01.txt`](draft-fane-ai-safety-txt-01.txt).
 To publish a declaration, start from the [example](#example) with your own values.
@@ -26,10 +26,10 @@ no signal about a site's posture before it reads. The person who delegated the t
 whatever the page says.
 
 A site publishes a short text file at `/.well-known/ai-safety.txt` with six fields:
-whether its content is asserted safe for agents, whether it is hardened against embedded
-injection, whether humans and agents see the same page, a contact, an attestation record
-and the date last verified. The declaration is self-asserted: a hint for the agent's
-risk decision, not proof.
+whether the domain vouches for its content's origin and intent, whether it is hardened
+against embedded injection, whether humans and agents see the same page, a contact, an
+attestation record and the date last verified. The declaration is self-asserted: a hint
+for the agent's risk decision, not proof.
 
 What you can do today: read a live declaration, including one that deliberately declares
 `Injection-Protected: false` and says why.
@@ -70,11 +70,12 @@ declaration is served at `https://opena2a.org/.well-known/ai-safety.txt`.
 
 ## The format
 
-`Field: value` lines, one per line. Six fields are defined.
+`Field: value` lines, one per line. A line whose first non-whitespace character is `#` is a
+comment. Six fields are defined.
 
 | Field | Type | Meaning |
 |---|---|---|
-| `AI-Safe` | boolean | Content is asserted safe for autonomous agent consumption. |
+| `AI-Safe` | boolean | Content is authored or reviewed by the domain, not user-generated, and not published with intent to harm a consuming agent: provenance and intent, not a claim that it is harmless to process. |
 | `Injection-Protected` | boolean | Content is hardened against embedded prompt injection. |
 | `Consistent-Rendering` | boolean | Identical content served to human and agent user agents (no cloaking). |
 | `Contact` | URI | Security or abuse contact. |
@@ -83,16 +84,18 @@ declaration is served at `https://opena2a.org/.well-known/ai-safety.txt`.
 
 ## Example
 
-The values describe a hypothetical `example.com`. Replace them with your own before
-publishing, and leave out `Attestation` until a verification record for your domain exists.
+This is the example from Section 3 of the draft. Its values describe a hypothetical
+`example.com`. Replace them with your own before publishing, and leave out `Attestation`
+until a verification record for your domain exists.
 
 ```
+# ai-safety.txt for example.com
 AI-Safe: true
 Injection-Protected: true
 Consistent-Rendering: true
-Contact: https://example.com/security
+Contact: mailto:security@example.com
 Attestation: https://registry.example.org/verify/example.com
-Last-Verified: 2026-07-06
+Last-Verified: 2026-07-01
 ```
 
 ## The well-known URI
