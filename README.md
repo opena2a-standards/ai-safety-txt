@@ -4,7 +4,7 @@ The domain AI-safety declaration format. A file published at `/.well-known/ai-sa
 where a domain declares its AI-safety posture to the agents that read its content.
 
 Specified as an IETF Internet-Draft, current revision
-[draft-fane-ai-safety-txt-01](https://datatracker.ietf.org/doc/draft-fane-ai-safety-txt/) (submitted 2026-07-23).
+[draft-fane-ai-safety-txt-01](https://datatracker.ietf.org/doc/draft-fane-ai-safety-txt/).
 Spec page: [specs.opena2a.org/specs/ai-safety](https://specs.opena2a.org/specs/ai-safety).
 
 ## What it is
