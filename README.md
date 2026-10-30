@@ -16,6 +16,15 @@ proof. A consuming agent should check the claim against the `Attestation` record
 Read the current draft: [`draft-fane-ai-safety-txt-01.txt`](draft-fane-ai-safety-txt-01.txt).
 To publish a declaration, start from the [example](#example) with your own values.
 
+## Who this is for
+
+Security leaders deciding what an agent may do with a site's declaration, engineers who
+publish or test it, developers whose agents read it, auditors seeking the evidence behind
+it, identity architects confirming it holds no credential, and standards reviewers.
+
+[Who reads this](docs/USE-CASES.md#who-reads-this) names the question each one brings and
+the section of the draft that answers it.
+
 ## The format
 
 `Field: value` lines, one per line. A line whose first non-whitespace character is `#` is a
