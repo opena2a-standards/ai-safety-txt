@@ -188,8 +188,9 @@ review. You want to check the claim instead of taking it on trust.
 Who acts: the platform or security engineer, or an agent that checks the claim before it
 relies on the page.
 
-Without the specification: a site that cloaks is found only after an agent has acted on a
-page no person reviewed.
+Without the specification: a site has no machine-readable way to state that it serves
+agents and people the same page, so an agent has no claim to test before it relies on the
+page.
 
 What the specification does: a consumer SHOULD treat a `Consistent-Rendering` declaration
 as testable, by fetching a page as both a human-like and an agent-like user agent and
